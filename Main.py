@@ -1,4 +1,5 @@
 import random
+import math
 import time
 laplength = 6
 print("Please enter settings for car 1")
@@ -37,120 +38,72 @@ for x in range(len(OAPCircuit)):
         car0lapspeed.append((OAPCircuit[x] - Randspeed))
         car1lapspeed.append((OAPCircuit[x] - Randspeed))
 # increasing or decreasing speed depending on the level of aro selected (car0)
-plusminushigh = [-1,-1,1,1,1,1,-1,]
+plusminushigh = [-1, -1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1]
+plusminuslow = [1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1]
+
 if DwnForce0 == 1:
-# make for loop put "1" and "-1" in array instead of + and -
-    car0lapspeed[0] = (car0lapspeed[0] - random.randint(0, 5))
-    car0lapspeed[1] = (car0lapspeed[1] - random.randint(0, 5))
-    car0lapspeed[2] = (car0lapspeed[2] + random.randint(0, 5))
-    car0lapspeed[3] = (car0lapspeed[3] + random.randint(0, 5))
-    car0lapspeed[4] = (car0lapspeed[4] + random.randint(0, 5))
-    car0lapspeed[5] = (car0lapspeed[5] + random.randint(0, 5))
-    car0lapspeed[6] = (car0lapspeed[6] - random.randint(0, 5))
-    car0lapspeed[7] = (car0lapspeed[7] + random.randint(0, 5))
-    car0lapspeed[8] = (car0lapspeed[8] + random.randint(0, 5))
-    car0lapspeed[9] = (car0lapspeed[9] - random.randint(0, 5))
-    car0lapspeed[10] = (car0lapspeed[10] + random.randint(0, 5))
-    car0lapspeed[11] = (car0lapspeed[11] - random.randint(0, 5))
-    car0lapspeed[12] = (car0lapspeed[12] + random.randint(0, 5))
-    car0lapspeed[13] = (car0lapspeed[13] + random.randint(0, 5))
-    car0lapspeed[14] = (car0lapspeed[14] + random.randint(0, 5))
-    car0lapspeed[15] = (car0lapspeed[15] - random.randint(0, 5))
-    car0lapspeed[16] = (car0lapspeed[16] + random.randint(0, 5))
-    car0lapspeed[17] = (car0lapspeed[17] - random.randint(0, 5))
-    car0lapspeed[18] = (car0lapspeed[18] + random.randint(0, 5))
-    car0lapspeed[19] = (car0lapspeed[19] + random.randint(0, 5))
+    for x in range(19):
+        car0lapspeed[x] = (car0lapspeed + (plusminushigh[x] * random.randint(0, 5)))
+
 elif DwnForce0 == 3:
-    car0lapspeed[0] = (car0lapspeed[0] + random.randint(0, 5))
-    car0lapspeed[1] = (car0lapspeed[1] + random.randint(0, 5))
-    car0lapspeed[2] = (car0lapspeed[2] - random.randint(0, 5))
-    car0lapspeed[3] = (car0lapspeed[3] - random.randint(0, 5))
-    car0lapspeed[4] = (car0lapspeed[4] - random.randint(0, 5))
-    car0lapspeed[5] = (car0lapspeed[5] - random.randint(0, 5))
-    car0lapspeed[6] = (car0lapspeed[6] + random.randint(0, 5))
-    car0lapspeed[7] = (car0lapspeed[7] - random.randint(0, 5))
-    car0lapspeed[8] = (car0lapspeed[8] - random.randint(0, 5))
-    car0lapspeed[9] = (car0lapspeed[9] + random.randint(0, 5))
-    car0lapspeed[10] = (car0lapspeed[10] - random.randint(0, 5))
-    car0lapspeed[11] = (car0lapspeed[11] + random.randint(0, 5))
-    car0lapspeed[12] = (car0lapspeed[12] - random.randint(0, 5))
-    car0lapspeed[13] = (car0lapspeed[13] - random.randint(0, 5))
-    car0lapspeed[14] = (car0lapspeed[14] - random.randint(0, 5))
-    car0lapspeed[15] = (car0lapspeed[15] + random.randint(0, 5))
-    car0lapspeed[16] = (car0lapspeed[16] - random.randint(0, 5))
-    car0lapspeed[17] = (car0lapspeed[17] + random.randint(0, 5))
-    car0lapspeed[18] = (car0lapspeed[18] - random.randint(0, 5))
-    car0lapspeed[19] = (car0lapspeed[19] - random.randint(0, 5))
+    for x in range(19):
+        car0lapspeed[x] = (car0lapspeed + (plusminuslow[x] * random.randint(0, 5)))
+
 # increasing or decreasing speed depending on the level of aro selected by user (car1)
 if DwnForce1 == 1:
-    car1lapspeed[0] = (car1lapspeed[0] - random.randint(0, 5))
-    car1lapspeed[1] = (car1lapspeed[1] - random.randint(0, 5))
-    car1lapspeed[2] = (car1lapspeed[2] + random.randint(0, 5))
-    car1lapspeed[3] = (car1lapspeed[3] + random.randint(0, 5))
-    car1lapspeed[4] = (car1lapspeed[4] + random.randint(0, 5))
-    car1lapspeed[5] = (car1lapspeed[5] + random.randint(0, 5))
-    car1lapspeed[6] = (car1lapspeed[6] - random.randint(0, 5))
-    car1lapspeed[7] = (car1lapspeed[7] + random.randint(0, 5))
-    car1lapspeed[8] = (car1lapspeed[8] + random.randint(0, 5))
-    car1lapspeed[9] = (car1lapspeed[9] - random.randint(0, 5))
-    car1lapspeed[10] = (car1lapspeed[10] + random.randint(0, 5))
-    car1lapspeed[11] = (car1lapspeed[11] - random.randint(0, 5))
-    car1lapspeed[12] = (car1lapspeed[12] + random.randint(0, 5))
-    car1lapspeed[13] = (car1lapspeed[13] + random.randint(0, 5))
-    car1lapspeed[14] = (car1lapspeed[14] + random.randint(0, 5))
-    car1lapspeed[15] = (car1lapspeed[15] - random.randint(0, 5))
-    car1lapspeed[16] = (car1lapspeed[16] + random.randint(0, 5))
-    car1lapspeed[17] = (car1lapspeed[17] - random.randint(0, 5))
-    car1lapspeed[18] = (car1lapspeed[18] + random.randint(0, 5))
-    car1lapspeed[19] = (car1lapspeed[19] + random.randint(0, 5))
+    for x in range(19):
+        car1lapspeed[x] = (car1lapspeed + (plusminushigh[x] * random.randint(0, 5)))
+
 elif DwnForce1 == 3:
-    car1lapspeed[0] = (car1lapspeed[0] + random.randint(0, 5))
-    car1lapspeed[1] = (car1lapspeed[1] + random.randint(0, 5))
-    car1lapspeed[2] = (car1lapspeed[2] - random.randint(0, 5))
-    car1lapspeed[3] = (car1lapspeed[3] - random.randint(0, 5))
-    car1lapspeed[4] = (car1lapspeed[4] - random.randint(0, 5))
-    car1lapspeed[5] = (car1lapspeed[5] - random.randint(0, 5))
-    car1lapspeed[6] = (car1lapspeed[6] + random.randint(0, 5))
-    car1lapspeed[7] = (car1lapspeed[7] - random.randint(0, 5))
-    car1lapspeed[8] = (car1lapspeed[8] - random.randint(0, 5))
-    car1lapspeed[9] = (car1lapspeed[9] + random.randint(0, 5))
-    car1lapspeed[10] = (car1lapspeed[10] - random.randint(0, 5))
-    car1lapspeed[11] = (car1lapspeed[11] + random.randint(0, 5))
-    car1lapspeed[12] = (car1lapspeed[12] - random.randint(0, 5))
-    car1lapspeed[13] = (car1lapspeed[13] - random.randint(0, 5))
-    car1lapspeed[14] = (car1lapspeed[14] - random.randint(0, 5))
-    car1lapspeed[15] = (car1lapspeed[15] + random.randint(0, 5))
-    car1lapspeed[16] = (car1lapspeed[16] - random.randint(0, 5))
-    car1lapspeed[17] = (car1lapspeed[17] + random.randint(0, 5))
-    car1lapspeed[18] = (car1lapspeed[18] - random.randint(0, 5))
-    car1lapspeed[19] = (car1lapspeed[19] - random.randint(0, 5))
+    for x in range(19):
+        car1lapspeed[x] = (car1lapspeed + (plusminuslow[x] * random.randint(0, 5)))
 
 sectorgaptime0 = []
 sectorgaptime1 = []
 for x in range(len(car0lapspeed)):
-    sectorgaptime0.append((car0lapspeed[x] * 0.2615)* )
-    sectorgaptime1.append((car1lapspeed[x] * 0.2615))
+    sectorgaptime0.append(0.2615 / (car0lapspeed[x]/3600))
+    sectorgaptime1.append(0.2615 / (car1lapspeed[x]/3600))
 lapnum0 = int(0)
 lapnum1 = int(0)
 time0 = int(0)
 time1 = int(0)
-for x in range(6):
-    for y in range(len(OAPCircuit)):
-        print(car0lapspeed[y])
-        while lapnum0 >= 19:
+p = 0
+q = 0
+for x in range(1):
+    for y in range(1):
+        while lapnum0 <= 19:
             time0 = (time0 + sectorgaptime0[y])
             lapnum0 = (lapnum0 + 1)
-        print(time0)
-        time.sleep(sectorgaptime0[y])
-         print("End of race car0")
-    for z in range(len(OAPCircuit)):
-        lapnum1 = (lapnum1 + 1)
-        print(car1lapspeed[z])
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print("Car 0")
+            print("speed", car0lapspeed[p])
+            print("time", time0)
+            print("Sector:", p)
+            p = (p + 1)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            time.sleep(sectorgaptime0[y])
+        print("End of race car0")
+    for z in range(1):
         while lapnum1 <= 19:
             time1 = (time1 + sectorgaptime1[z])
-        print(time1)
-        time.sleep(sectorgaptime1[z])
+            lapnum1 = (lapnum1 + 1)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print("Car 1")
+            print("speed", car1lapspeed[q])
+            print("time", time1)
+            print("Sector:", q)
+            q = (q + 1)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            time.sleep(sectorgaptime1[z])
         print("End of race car1")
 
 print("End of race!")
+print("Car0:", time0, "Car1:", time1)
+if time1 > time0:
+    print("Car0 is the winner")
+elif time0 > time1:
+    print("Car1 is the winner")
+else:
+    print("It was a tie!!!!")
+
 
