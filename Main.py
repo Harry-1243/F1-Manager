@@ -1,6 +1,5 @@
 import random
 import time
-import time
 laplength = 6
 print("Please enter settings for car 1")
 
@@ -38,7 +37,9 @@ for x in range(len(OAPCircuit)):
         car0lapspeed.append((OAPCircuit[x] - Randspeed))
         car1lapspeed.append((OAPCircuit[x] - Randspeed))
 # increasing or decreasing speed depending on the level of aro selected (car0)
+plusminushigh = [-1,-1,1,1,1,1,-1,]
 if DwnForce0 == 1:
+# make for loop put "1" and "-1" in array instead of + and -
     car0lapspeed[0] = (car0lapspeed[0] - random.randint(0, 5))
     car0lapspeed[1] = (car0lapspeed[1] - random.randint(0, 5))
     car0lapspeed[2] = (car0lapspeed[2] + random.randint(0, 5))
@@ -128,30 +129,28 @@ sectorgaptime0 = []
 sectorgaptime1 = []
 for x in range(len(car0lapspeed)):
     sectorgaptime0.append((car0lapspeed[x] * 0.2615))
-for x in range(len(car1lapspeed)):
     sectorgaptime1.append((car1lapspeed[x] * 0.2615))
 lapnum0 = int(0)
 lapnum1 = int(0)
 time0 = int(0)
 time1 = int(0)
 for x in range(6):
-    for x in range(len(OAPCircuit)):
+    for y in range(len(OAPCircuit)):
         lapnum0 = (lapnum0 + 1)
-        print(car0lapspeed[x])
+        print(car0lapspeed[y])
         while lapnum0 >= 19:
-            time0 = (time0 + sectorgaptime0[x])
+            time0 = (time0 + sectorgaptime0[y])
         print(time0)
-        time.sleep(sectorgaptime0[x])
+        time.sleep(sectorgaptime0[y])
         print("End of race car0")
-    for x in range(len(OAPCircuit)):
+    for z in range(len(OAPCircuit)):
         lapnum1 = (lapnum1 + 1)
-        print(car1lapspeed[x])
+        print(car1lapspeed[z])
         while lapnum1 <= 19:
-            time1 = (time1 + sectorgaptime1[x])
+            time1 = (time1 + sectorgaptime1[z])
         print(time1)
-        time.sleep(sectorgaptime1[x])
+        time.sleep(sectorgaptime1[z])
         print("End of race car1")
 
 print("End of race!")
-
 
