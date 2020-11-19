@@ -128,7 +128,7 @@ elif DwnForce1 == 3:
 sectorgaptime0 = []
 sectorgaptime1 = []
 for x in range(len(car0lapspeed)):
-    sectorgaptime0.append((car0lapspeed[x] * 0.2615))
+    sectorgaptime0.append((car0lapspeed[x] * 0.2615)* )
     sectorgaptime1.append((car1lapspeed[x] * 0.2615))
 lapnum0 = int(0)
 lapnum1 = int(0)
@@ -136,13 +136,13 @@ time0 = int(0)
 time1 = int(0)
 for x in range(6):
     for y in range(len(OAPCircuit)):
-        lapnum0 = (lapnum0 + 1)
         print(car0lapspeed[y])
         while lapnum0 >= 19:
             time0 = (time0 + sectorgaptime0[y])
+            lapnum0 = (lapnum0 + 1)
         print(time0)
         time.sleep(sectorgaptime0[y])
-        print("End of race car0")
+         print("End of race car0")
     for z in range(len(OAPCircuit)):
         lapnum1 = (lapnum1 + 1)
         print(car1lapspeed[z])
