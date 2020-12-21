@@ -1,5 +1,4 @@
 import random
-import math
 import time
 laplength = 6
 print("Please enter settings for car 1")
@@ -19,7 +18,7 @@ print("2: Medium")
 print("3: Low")
 DwnForce1 = int(input())
 
-#Lap Speeds
+# Lap Speeds
 OAPCircuit = [330, 175, 315, 110, 185, 270, 155, 275, 300, 130, 255, 310, 265, 300, 310, 150, 245, 220, 90, 190]
 
 # Gear Changes. 0 == N
@@ -29,35 +28,38 @@ OAPCircuitG = [0, 8, 4, 8, 3, 4, 7, 4, 7, 7, 3, 6, 8, 7, 7, 8, 4, 6, 5, 2, 4]
 car0lapspeed = []
 car1lapspeed = []
 for x in range(len(OAPCircuit)):
-    Randspeed = int(random.randint(1, 5))
-    Randposneg = int(random.randint(0, 1))
-    if Randposneg == 1:
-        car0lapspeed.append((OAPCircuit[x] + Randspeed))
-        car1lapspeed.append((OAPCircuit[x] + Randspeed))
-    elif Randposneg == 0:
-        car0lapspeed.append((OAPCircuit[x] - Randspeed))
-        car1lapspeed.append((OAPCircuit[x] - Randspeed))
+    Randspeed0 = int(random.randint(1, 100))
+    Randposneg0 = int(random.randint(0, 100))
+    if Randposneg0 % 2 == 0:
+        car0lapspeed.append((OAPCircuit[x] + Randspeed0))
+    else:
+        car0lapspeed.append((OAPCircuit[x] - Randspeed0))
+    Randspeed1 = int(random.randint(1, 100))
+    Randposneg1 = int(random.randint(0, 100))
+    if Randposneg1 % 2 == 0:
+        car1lapspeed.append((OAPCircuit[x] + Randspeed1))
+    else:
+        car1lapspeed.append((OAPCircuit[x] - Randspeed1))
 # increasing or decreasing speed depending on the level of aro selected (car0)
 plusminushigh = [-1, -1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1]
 plusminuslow = [1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1]
 
 if DwnForce0 == 1:
     for x in range(19):
-        car0lapspeed[x] = (car0lapspeed + (plusminushigh[x] * random.randint(0, 5)))
+        car0lapspeed.append(car0lapspeed[x]+(plusminushigh[x] * random.randint(0, 5)))
 
 elif DwnForce0 == 3:
     for x in range(19):
-        car0lapspeed[x] = (car0lapspeed + (plusminuslow[x] * random.randint(0, 5)))
+        car0lapspeed.append(car0lapspeed[x] + (plusminuslow[x] * random.randint(0, 5)))
 
 # increasing or decreasing speed depending on the level of aro selected by user (car1)
 if DwnForce1 == 1:
     for x in range(19):
-        car1lapspeed[x] = (car1lapspeed + (plusminushigh[x] * random.randint(0, 5)))
+        car1lapspeed.append(car1lapspeed[x] + (plusminushigh[x] * random.randint(0, 5)))
 
 elif DwnForce1 == 3:
     for x in range(19):
-        car1lapspeed[x] = (car1lapspeed + (plusminuslow[x] * random.randint(0, 5)))
-
+        car1lapspeed.append(car1lapspeed[x] + (plusminuslow[x] * random.randint(0, 5)))
 sectorgaptime0 = []
 sectorgaptime1 = []
 for x in range(len(car0lapspeed)):
@@ -105,5 +107,3 @@ elif time0 > time1:
     print("Car1 is the winner")
 else:
     print("It was a tie!!!!")
-
-
