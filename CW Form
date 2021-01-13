@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1> Welcome To the F1 Tyre Management Sim</h1>
+
+<p>Please select the level of downforce to be applied to Car0:</p>
+
+<form action="/action_page.php">
+
+  <input type="radio" id="car0H" name="DF0" value="1">
+  <label style="color:white;" for="car0H">High</label><br>
+  
+  <input type="radio" id="car0M" name="DF0" value="2">
+  <label style="color:white;"for="car0M">Medium</label><br>
+  
+  <input type="radio" id="car0L" name="DF0" value="3">
+  <label style="color:white;"for="car0L">Low</label><br><br>
+  
+  <p>Please select the level of downforce to be applied to Car1:</p>
+
+<form action="/action_page.php">
+    <input type="radio" id="car1H" name="DF1" value="1">
+  <label style="color:white;"for="car1H">High</label><br>
+  
+  <input type="radio" id="car1M" name="DF1" value="2">
+  <label style="color:white;"for="car1M">Medium</label><br>
+  
+  <input type="radio" id="car1L" name="DF1" value="3">
+  <label style="color:white;"for="car0L">Low</label><br><br>
+  <input type="submit" value="Enter Race">
+</form> 
+
+</body>
+</html>
+
+<style>
+body {background-color: #00134d;}
+h1   {color: white;}
+p    {color: white;}
+</style>
