@@ -10,27 +10,29 @@
   background-color: #2196F3;
   padding: 10px;
 }
-
 .grid-container > div {
   background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
   padding: 20px 0;
   font-size: 30px;
 }
 
 .item1 {
+    text-align: center;
   grid-column-start: 1;
   grid-column-end: 5;
 }
 .item2 {
+    text-align: right;
   grid-column-start: 2;
   grid-column-end: 5;
 }
 .item3 {
+    text-align: left;
   grid-row-start: 2;
   grid-row-end: 5;
 }
 .item4 {
+    text-align: right;
   grid-column-start: 2;
   grid-column-end: 5;
 }
@@ -47,11 +49,26 @@
 <body>
 
 <div class="grid-container">
-  <div class="item1">Albert Park Circuit</div>
-  <div class="item2">Car0Data</div>
+  <div class="item1"><strong>Albert Park Circuit</strong> <br> Melbourne</div>
+  <div class="item2"><strong>Car0Data</strong> <br> Lap time: {{ totaltime0 }} <br> Current tyre: {{ currenttyre0 }} <br> Tyre Ware: {{ tyreware0 }}% </div>
   <div class="item3">LeaderBoard</div>
-  <div class="item4">Car1Data</div>
-  <div class="item5">Car1PitOptions</div>
-  <div class="item6">Car0PitOptions</div>
+  <div class="item4"><Strong>Car1Data</Strong> <br> Lap time: {{ totaltime1 }} <br> Current tyre: {{ currenttyre1 }} <br> Tyre Ware: {{ tyreware1 }}%</div>
+  <div class="item5"><strong>Car0PitOptions:</strong>
+  <form action="/home">
+  <input type="radio" id="Car0" name="Car0" value="Soft">
+  <label style="color:black;" for="Car0">Soft</label>
+  <input type="radio" id="Car0" name="Car0" value="Medium">
+  <label style="color:black;"for="Car0">Medium</label>
+  <input type="radio" id="Car0" name="Car0" value="Hard">
+  <label style="color:black;"for="Car0">Hard</label>
+  </div>
+  <div class="item6"><strong>Car1PitOptions:</strong><br>
+  <form action="/home">
+  <input type="radio" id="Car1" name="Car1" value="Soft">
+  <label style="color:black;" for="Car1">Soft</label>
+  <input type="radio" id="Car1" name="Car1" value="Medium">
+  <label style="color:black;"for="Car1">Medium</label>
+  <input type="radio" id="Car1" name="Car1" value="Hard">
+  <label style="color:black;"for="Car1">Hard</label></div>
 </body>
 </html>
