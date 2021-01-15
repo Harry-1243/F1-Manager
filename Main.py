@@ -6,71 +6,53 @@ import time
 app = Flask(__name__)
 @app.route('/')
 def form():
-        return render_template('forms.html')
+        return render_template('forms.html')  # Linking flask_app.py to forms.html
 
 @app.route('/home')
 def dwnforce():
-    DF0 = request.args.get('DF0', '')
+    DF0 = request.args.get('DF0', '') # Inporting the downforce choice from the forms
     DF1 = request.args.get('DF1', '')
     return render_template('home.html')
-    def pit0():
-        pitQ = input("do you want to pit car0 next lap")
-        if pitQ == yes:
-            print("What would tyre would you like to change to?")
-            print("1. Soft")
-            print("2. Medium")
-            print("3.Hard")
-            tobtyre0 = input()
-            if tobtyre0 == 1:
+    def pit0(): # Pit function for car 0
+            tobtyre0 = request.args.get('Car0', '') # inporting the choice of tyre from home.html
+            if tobtyre0 == "Soft":
                 for x in range(sectorgaptime0):
-                    sectorgaptime0.append(sectorgaptime0[x] - 0.6)
-                tyredegrading0 = 2
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25))
+                    sectorgaptime0.append(sectorgaptime0[x] - 0.6) # decreasing time between sectors so car0 goes faster
+                tyredegrading0 = 2 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
 
-            elif tobtyre0 == 2:
-                tyredegrading0 = 3
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25))
+            elif tobtyre0 == "Medium":
+                tyredegrading0 = 3 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
 
-            elif tobtyre0 == 1:
+            elif tobtyre0 == "Hard":
                 for x in range(sectorgaptime0):
-                    sectorgaptime0.append(sectorgaptime0[x] + 0.7)
-                tyredegrading0 = 4
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25))
-        else:
-            print("Ok")
+                    sectorgaptime0.append(sectorgaptime0[x] + 0.7) # increasing time between sectors so car0 goes slower
+                tyredegrading0 = 4 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
 
 
-    def pit1():
-        pitQ = input("do you want to pit car1 next lap")
-        if pitQ == yes:
-            print("What would tyre would you like to change to?")
-            print("1. Soft")
-            print("2. Medium")
-            print("3.Hard")
-            tobtyre1 = input()
-            if tobtyre1 == 1:
+    def pit1(): # Pit function for car 1
+            tobtyre1 = request.args.get('Car1', '') # inporting the choice of tyre from home.html
+            if tobtyre1 == "Soft":
                 for x in range(sectorgaptime1):
-                    sectorgaptime1.append(sectorgaptime1[x] - 0.6)
-                tyredegrading1 = 2
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25))
+                    sectorgaptime1.append(sectorgaptime1[x] - 0.6) # decreasing time between sectors so car1 goes faster
+                tyredegrading1 = 2 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
 
-            elif tobtyre1 == 2:
-                tyredegrading1 = 3
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25))
-            elif tobtyre1 == 1:
+            elif tobtyre1 == "Medium":
+                tyredegrading1 = 3 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
+            elif tobtyre1 == "Hard":
                 for x in range(sectorgaptime1):
-                    sectorgaptime1.append(sectorgaptime1[x] + 0.7)
-                tyredegrading1 = 4
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25))
-        else:
-            print("Ok")
+                    sectorgaptime1.append(sectorgaptime1[x] + 0.7)# increasing time between sectors so car1 goes slower
+                tyredegrading1 = 4 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
 
 
     def tyredegrading():
-        tyre0per = ((tyredegrading0/lapnumber) * 100)
-        tyre1per = ((tyredegrading1/lapnumber) * 100)
-        print(tyre0per, "%")
-        print(tyre1per, "%")
+        tyre0per = ((tyredegrading0/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 0
+        tyre1per = ((tyredegrading1/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 1
         if tyre0per <= 0:
             print("car0 out of race")
             car0crash = 1
@@ -82,8 +64,8 @@ def dwnforce():
     laplength = 6
     car02bpitted = 0
     car12bpitted = 0
-    currenttyre1 = ""
-    currenttyre0 = ""
+    currenttyre1 = "Medium"
+    currenttyre0 = "Medium"
     tobtyre1 = ""
     tobtyre0 = ""
     car0crash = 0
@@ -131,17 +113,14 @@ def dwnforce():
     sectorgaptimeRAI = []
     sectorgaptimeGIO = []
     # Lap Speeds
-    OAPCircuit = [330, 175, 315, 110, 185, 270, 155, 275, 300, 130, 255, 310, 265, 300, 310, 150, 245, 220, 90, 190]
+    OAPCircuit = [330, 175, 315, 110, 185, 270, 155, 275, 300, 130, 255, 310, 265, 300, 310, 150, 245, 220, 90, 190] # an bace line speed for each sector
 
-    # Gear Changes. 0 == N
-    OAPCircuitG = [0, 8, 4, 8, 3, 4, 7, 4, 7, 7, 3, 6, 8, 7, 7, 8, 4, 6, 5, 2, 4]
 
     # Determining Car speeds in race
-
     for x in range(len(OAPCircuit[x])):
         Randspeed0 = int(random.randint(1, 100))
         Randposneg0 = int(random.randint(0, 100))
-        if Randposneg0 % 2 == 0:
+        if Randposneg0 % 2 == 0: # random speed variation
             car0lapspeed.append((OAPCircuit[x] + Randspeed0))
         else:
             car0lapspeed.append((OAPCircuit[x] - Randspeed0))
@@ -151,13 +130,14 @@ def dwnforce():
             car1lapspeed.append((OAPCircuit[x] + Randspeed1))
         else:
             car1lapspeed.append((OAPCircuit[x] - Randspeed1))
+
     # increasing or decreasing speed depending on the level of aro selected
     plusminushigh = [-1, -1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1]
     plusminuslow = [1, 1, -1, -1, -1, -1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, 1, -1, -1]
 
     botracers = [HAMlapspeed, BOTlapspeed, VERlapspeed, ALBlapspeed, NORlapspeed, RIClapspeed, OCOlapspeed, STRlapspeed, PERlapspeed, GROlapspeed, MAGlapspeed, RUSlapspeed, KVYlapspeed, PIElapspeed, LEClapspeed, VETlapspeed, RAIlapspeed, GIOlapspeed]
     botspeed = []
-    for x in range(len(OAPCircuit[x])):
+    for x in range(len(OAPCircuit[x])): # random picking downforce levels for other racers
         u = random.randint(1,100)
         if u % 2 == 0:
             botspeed.append(-1)
@@ -166,58 +146,347 @@ def dwnforce():
         botracers[x].append(OAPCircuit[x] + (botspeed[x] * u))
 
 
-    if DF0 == 1:
+    if DF0 == 1: # Applying differnces to speed depending on aro levels
         for x in range(19):
             car0lapspeed.append(car0lapspeed[x] + (plusminushigh[x] * random.randint(0, 5)))
 
-    elif DF0 == 3:
+    elif DF0 == 3: # Applying differnces to speed depending on aro levels
         for x in range(19):
             car0lapspeed.append(car0lapspeed[x] + (plusminuslow[x] * random.randint(0, 5)))
 
     # increasing or decreasing speed depending on the level of aro selected by user
-    if DF1 == 1:
+    if DF1 == 1: # Applying differnces to speed depending on aro levels
         for x in range(19):
             car1lapspeed.append(car1lapspeed[x] + (plusminushigh[x] * random.randint(0, 5)))
 
-    elif DF1 == 3:
+    elif DF1 == 3: # Applying differnces to speed depending on aro levels
         for x in range(19):
             car1lapspeed.append(car1lapspeed[x] + (plusminuslow[x] * random.randint(0, 5)))
 
-    for x in range(len(car1lapspeed)):
+    for x in range(len(car1lapspeed)): # giving variation to the speeds for the bots
         botracers[x].append(botracers[x] + (u * random.randint(1, 5)))
 
 
     racersectortime = [sectorgaptime0, sectorgaptime1, sectorgaptimeHAM, sectorgaptimeBOT, sectorgaptimeVER, sectorgaptimeALB, sectorgaptimeNOR, sectorgaptimeRIC,  sectorgaptimeOCO, sectorgaptimeSTR, sectorgaptimePER, sectorgaptimeGRO, sectorgaptimeMAG, sectorgaptimeRUS, sectorgaptimeKVY, sectorgaptimePIE, sectorgaptimeLEC, sectorgaptimeVET, sectorgaptimeRAI, sectorgaptimeGIO]
-    for x in range(20):
+    for x in range(20): # calculating time taken between sectors from speed and distance
         for i in range(len(car1lapspeed)):
             racersectortime[x].append(0.2615 / (racersectortime[i]/3600))
 
-    while laplength > 0:
-        for x in range(len(car1lapspeed)):
-            lapnumber = (lapnumber + 1)
-            totaltime0 = (totaltime0 + sectorgaptime0[x])
-            totaltime1 = (totaltime1 + sectorgaptime1[x])
-            totaltimeHAM = (totaltimeHAM + sectorgaptimeHAM[x])
-            totaltimeBOT = (totaltimeBOT + sectorgaptimeBOT[x])
-            totaltimeVER = (totaltimeVER + sectorgaptimeVER[x])
-            totaltimeALB = (totaltimeALB + sectorgaptimeALB[x])
-            totaltimeNOR = (totaltimeNOR + sectorgaptimeNOR[x])
-            totaltimeRIC = (totaltimeRIC + sectorgaptimeRIC[x])
-            totaltimeOCO = (totaltimeOCO + sectorgaptimeOCO[x])
-            totaltimeSTR = (totaltimeSTR + sectorgaptimeSTR[x])
-            totaltimePER = (totaltimePER + sectorgaptimePER[x])
-            totaltimeGRO = (totaltimeGRO + sectorgaptimeGRO[x])
-            totaltimeMAG = (totaltimeMAG + sectorgaptimeMAG[x])
-            totaltimeRUS = (totaltimeRUS + sectorgaptimeRUS[x])
-            totaltimeKVY = (totaltimeKVY + sectorgaptimeKVY[x])
-            totaltimePIE = (totaltimePIE + sectorgaptimePIE[x])
-            totaltimeLEC = (totaltimeLEC + sectorgaptimeLEC[x])
-            totaltimeVET = (totaltimeVET + sectorgaptimeVET[x])
-            totaltimeRAI = (totaltimeRAI + sectorgaptimeRAI[x])
-            totaltimeGIO = (totaltimeGIO + sectorgaptimeGIO[x])
-            pit0()
+    botpitH = 3
+    botpitBOT = 3
+    botpitVER = 3
+    botpitALB = 3
+    botpitNOR = 3
+    botpitRIC = 3
+    botpitOCO = 3
+    botpitSTR = 3
+    botpitPER = 3
+    botpitGRO = 3
+    botpitMAG = 3
+    botpitRUS = 3
+    botpitKVY = 3
+    botpitPIE = 3
+    botpitLEC = 3
+    botpitVET = 3
+    botpitRAI = 3
+    botpitGIO = 3
+    while lapnumber != 10:
+        (lapnumber + 1)
+
+        while car1lapnumber != 10:
+            car1lapnumber = (car1lapnumber + 1) # car's lap number
+            for y in range(len(car1lapspeed)):
+                totaltime1 = (totaltime1 + sectortimegap1[y]) # calculating time taken for entire race
+                tyredegrading()
+            laptime1 = totaltime1 # lap time
             pit1()
-            tyredegrading()
-            tyredegrading1 = (tyredegrading1 - 1)
-            tyredegrading0 = (tyredegrading0 - 1)
+
+        while car0lapnumber != 10:
+            car0lapnumber = (car0lapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltime0 = (totaltime0 + sectortimegap0[y])
+                tyredegrading()
+            laptime0 = totaltime0
+            pit0()
+
+        return render_template ('home.html', car0lapnumber=car0lapnumber, laptime1=laptime1, currenttyre0=currentyre0, tyreware0=tyreware0, laptime0=laptime0, currenttyre1=currentyre1, tyreware1=tyreware1, car1lapnumber=car1lapnumber)
+
+            #enamy driver laps
+
+        while HAMlapnumber != 10:
+            HAMlapnumber = (HAMlapnumber + 1) # drivers lap number
+            for y in range(len(car0lapspeed)):
+                totaltimeHAM = (totaltimeHAM + sectortimegapHAM[y]) # total lap time
+            laptimeHAM = totaltimeHAM # laptime
+            if hampitH != 0:
+                ab = random.randint(1, 100)
+                if ab % 2 == 0: # randomly pick wether driver should pit
+                    totaltimeHAM = (totaltimeHAM + random.randint(15, 25) # adding time for pit
+                    (botpitH - 1) # draver can pit max 3 times
+                else:
+                    
+            else:
+                break
+
+        while BOTlapnumber != 10:
+            BOTlapnumber = (BOTlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeBOT = (totaltimeBOT + sectortimegapBOT[y])
+            laptimeBOT = totaltimeBOT
+            if botpitBOT != 0:
+                ac = random.randint(1, 100)
+                if ac % 2 == 0:
+                    totaltimeBOT = (totaltimeBOT + random.randint(15, 25)
+                    botpitBOT = (botpitBOT - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while VERlapnumber != 10:
+            VERlapnumber = (BOTlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeVER = (totaltimeVER + sectortimegapVER[y])
+            laptimeVER = totaltimeVER
+            if botpitVER != 0:
+                ad = random.randint(1, 100)
+                if ad % 2 == 0:
+                    totaltimeVER = (totaltimeVER + random.randint(15, 25)
+                    botpitVER = (botpitVER - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while ALBlapnumber != 10:
+            ALBlapnumber = (ALBlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeALB = (totaltimeALB + sectortimegapALB[y])
+            laptimeALB = totaltimeALB
+            if botpitALB != 0:
+                ae = random.randint(1, 100)
+                if ae % 2 == 0:
+                    totaltimeALB = (totaltimeALB + random.randint(15, 25)
+                    botpitALB = (botpitALB - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while NORlapnumber != 10:
+            NORlapnumber = (NORlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeNOR = (totaltimeNOR + sectortimegapNOR[y])
+            laptimeNOR = totaltimeNOR
+            if botpitNOR != 0:
+                af = random.randint(1, 100)
+                if af % 2 == 0:
+                    totaltimeNOR = (totaltimeNOR + random.randint(15, 25)
+                    botpitNOR = (botpitNOR - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while RIClapnumber != 10:
+            RIClapnumber = (RIClapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeRIC = (totaltimeRIC + sectortimegapRIC[y])
+            laptimeRIC = totaltimeRIC
+            if botpitRIC != 0:
+                ag = random.randint(1, 100)
+                if ag % 2 == 0:
+                    totaltimeRIC = (totaltimeRIC + random.randint(15, 25)
+                    botpitRIC = (botpitRIC - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while OCOlapnumber != 10:
+            OCOlapnumber = (OCOlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeOCO = (totaltimeOCO + sectortimegapOCO[y])
+            laptimeOCO = totaltimeOCO
+            if botpitOCO != 0:
+                ah = random.randint(1, 100)
+                if ah % 2 == 0:
+                    totaltimeOCO = (totaltimeOCO + random.randint(15, 25)
+                    botpitOCO = (botpitOCO - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while STRlapnumber != 10:
+            STRlapnumber = (OCOlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeSTR = (totaltimeSTR + sectortimegapSTR[y])
+            laptimeSTR = totaltimeSTR
+            if botpitSTR != 0:
+                ai = random.randint(1, 100)
+                if ai % 2 == 0:
+                    totaltimeSTR = (totaltimeSTR + random.randint(15, 25)
+                    botpitSTR = (botpitSTR - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while PERlapnumber != 10:
+            PERlapnumber = (PERlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimePER = (totaltimePER + sectortimegapPER[y])
+            laptimePER = totaltimePER
+            if botpitPER != 0:
+                aj = random.randint(1, 100)
+                if aj % 2 == 0:
+                    totaltimePER = (totaltimeSTR + random.randint(15, 25)
+                    botpitPER = (botpitPER - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while GROlapnumber != 10:
+            GROlapnumber = (GROlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeGRO = (totaltimeGRO + sectortimegapGRO[y])
+            laptimeGOR = totaltimeGOR
+            if botpitGRO != 0:
+                ak = random.randint(1, 100)
+                if ak % 2 == 0:
+                    totaltimeGRO = (totaltimeGOR + random.randint(15, 25)
+                    botpitGRO = (botpitGRO - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while MAGlapnumber != 10:
+            MAGlapnumber = (MAGlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeMAG = (totaltimeMAG + sectortimegapMAG[y])
+            laptimeMAG = totaltimeMAG
+            if botpitMAG != 0:
+                al = random.randint(1, 100)
+                if al % 2 == 0:
+                    totaltimeMAG = (totaltimeMAG + random.randint(15, 25)
+                    botpitMAG = (botpitMAG - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while RUSlapnumber != 10:
+            RUSlapnumber = (RUSlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeRUS = (totaltimeRUS + sectortimegapRUS[y])
+            laptimeRUS = totaltimeRUS
+            if botpitRUS != 0:
+                am = random.randint(1, 100)
+                if am % 2 == 0:
+                    totaltimeRUS = (totaltimeRUS + random.randint(15, 25)
+                    botpitRUS = (botpitRUS - 1)
+                else:
+                    continue
+            else:
+                continue
+
+
+        while KVYlapnumber != 10:
+            KVYlapnumber = (KVYlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeKVY = (totaltimeKVY + sectortimegapKVY[y])
+            laptimeKVY = totaltimeKVY
+            if botpitKVY != 0:
+                an = random.randint(1, 100)
+                if an % 2 == 0:
+                    totaltimeKVY = (totaltimeKVY + random.randint(15, 25)
+                    botpitKVY = (botpitKVY - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while PIElapnumber != 10:
+            PIElapnumber = (PIElapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimePIE = (totaltimePIE + sectortimegapPIE[y])
+            laptimePIE = totaltimePIE
+            if botpitPIE != 0:
+                ao = random.randint(1, 100)
+                if ao % 2 == 0:
+                    totaltimePIE = (totaltimePIE + random.randint(15, 25)
+                    botpitPIE = (botpitPIE - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while LEClapnumber != 10:
+            LEClapnumber = (LEClapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeLEC = (totaltimeLEC + sectortimegapLEC[y])
+            laptimeLEC = totaltimeLEC
+            if botpitLEC != 0:
+                ap = random.randint(1, 100)
+                if ap % 2 == 0:
+                    totaltimeLEC = (totaltimeLEC + random.randint(15, 25)
+                    botpitLEC = (botpitLEC - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while VETlapnumber != 10:
+            VETlapnumber = (VETlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeVET = (totaltimeVET + sectortimegapVET[y])
+            laptimeVET = totaltimeVET
+            if botpitVET != 0:
+                aq = random.randint(1, 100)
+                if aq % 2 == 0:
+                    totaltimeVET = (totaltimeVET + random.randint(15, 25)
+                    botpitVET = (botpitVET - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while RAIlapnumber != 10:
+            RAIlapnumber = (RAIlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeRAI = (totaltimeRAI + sectortimegapRAI[y])
+            laptimeRAI = totaltimeRAI
+            if botpitRAI != 0:
+                ar = random.randint(1, 100)
+                if ar % 2 == 0:
+                    totaltimeRAI = (totaltimeRAI + random.randint(15, 25)
+                    botpitRAI = (botpitRAI - 1)
+                else:
+                    continue
+            else:
+                continue
+
+        while GIOlapnumber != 10:
+            GIOlapnumber = (GIOlapnumber + 1)
+            for y in range(len(car0lapspeed)):
+                totaltimeGIO = (totaltimeGIO + sectortimegapGIO[y])
+            laptimeGIO = totaltimeGIO
+            if botpitGIO != 0:
+                at = random.randint(1, 100)
+                if at % 2 == 0:
+                    totaltimeGIO = (totaltimeGIO + random.randint(15, 25)
+                    botpitGIO = (botpitGIO - 1)
+                else:
+                    continue
+            else:
+                continue
+        tyredegrading1 = (tyredegrading1 - 1)
+        tyredegrading0 = (tyredegrading0 - 1)
+        return render_template ('home.html', car0lapnumber=car0lapnumber, laptime1=laptime1, currenttyre0=currentyre0, tyreware0=tyreware0, laptime0=laptime0, currenttyre1=currentyre1, tyreware1=tyreware1, car1lapnumber=car1lapnumber)
+
+
+
 
