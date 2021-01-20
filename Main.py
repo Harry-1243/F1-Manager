@@ -224,7 +224,7 @@ def dwnforce():
                     totaltimeHAM = (totaltimeHAM + random.randint(15, 25) # adding time for pit
                     (botpitH - 1) # draver can pit max 3 times
                 else:
-                    
+
             else:
                 break
 
