@@ -190,6 +190,7 @@ def dwnforce():
     botpitVET = 3
     botpitRAI = 3
     botpitGIO = 3
+    botpitHAM = 3
     while lapnumber != 10:
         (lapnumber + 1)
 
@@ -214,19 +215,16 @@ def dwnforce():
             #enamy driver laps
 
         while HAMlapnumber != 10:
+
             HAMlapnumber = (HAMlapnumber + 1) # drivers lap number
             for y in range(len(car0lapspeed)):
                 totaltimeHAM = (totaltimeHAM + sectortimegapHAM[y]) # total lap time
             laptimeHAM = totaltimeHAM # laptime
-            if hampitH != 0:
+            if botpitHAM != 0:
                 ab = random.randint(1, 100)
                 if ab % 2 == 0: # randomly pick wether driver should pit
-                    totaltimeHAM = (totaltimeHAM + random.randint(15, 25) # adding time for pit
-                    (botpitH - 1) # draver can pit max 3 times
-                else:
-
-            else:
-                break
+                    totaltimeHAM = (totaltimeHAM + random.randint(15, 25)) # adding time for pit
+                    botpitHAM = botpitHAM - 1 # driver can pit max 3 times
 
         while BOTlapnumber != 10:
             BOTlapnumber = (BOTlapnumber + 1)
@@ -236,12 +234,9 @@ def dwnforce():
             if botpitBOT != 0:
                 ac = random.randint(1, 100)
                 if ac % 2 == 0:
-                    totaltimeBOT = (totaltimeBOT + random.randint(15, 25)
+                    totaltimeBOT = (totaltimeBOT + random.randint(15, 25))
                     botpitBOT = (botpitBOT - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while VERlapnumber != 10:
             VERlapnumber = (BOTlapnumber + 1)
@@ -251,12 +246,9 @@ def dwnforce():
             if botpitVER != 0:
                 ad = random.randint(1, 100)
                 if ad % 2 == 0:
-                    totaltimeVER = (totaltimeVER + random.randint(15, 25)
+                    totaltimeVER = (totaltimeVER + random.randint(15, 25))
                     botpitVER = (botpitVER - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while ALBlapnumber != 10:
             ALBlapnumber = (ALBlapnumber + 1)
@@ -266,12 +258,9 @@ def dwnforce():
             if botpitALB != 0:
                 ae = random.randint(1, 100)
                 if ae % 2 == 0:
-                    totaltimeALB = (totaltimeALB + random.randint(15, 25)
+                    totaltimeALB = (totaltimeALB + random.randint(15, 25))
                     botpitALB = (botpitALB - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while NORlapnumber != 10:
             NORlapnumber = (NORlapnumber + 1)
@@ -281,12 +270,9 @@ def dwnforce():
             if botpitNOR != 0:
                 af = random.randint(1, 100)
                 if af % 2 == 0:
-                    totaltimeNOR = (totaltimeNOR + random.randint(15, 25)
+                    totaltimeNOR = (totaltimeNOR + random.randint(15, 25))
                     botpitNOR = (botpitNOR - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while RIClapnumber != 10:
             RIClapnumber = (RIClapnumber + 1)
@@ -296,12 +282,9 @@ def dwnforce():
             if botpitRIC != 0:
                 ag = random.randint(1, 100)
                 if ag % 2 == 0:
-                    totaltimeRIC = (totaltimeRIC + random.randint(15, 25)
+                    totaltimeRIC = (totaltimeRIC + random.randint(15, 25))
                     botpitRIC = (botpitRIC - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while OCOlapnumber != 10:
             OCOlapnumber = (OCOlapnumber + 1)
@@ -311,12 +294,9 @@ def dwnforce():
             if botpitOCO != 0:
                 ah = random.randint(1, 100)
                 if ah % 2 == 0:
-                    totaltimeOCO = (totaltimeOCO + random.randint(15, 25)
+                    totaltimeOCO = (totaltimeOCO + random.randint(15, 25))
                     botpitOCO = (botpitOCO - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while STRlapnumber != 10:
             STRlapnumber = (OCOlapnumber + 1)
@@ -326,12 +306,9 @@ def dwnforce():
             if botpitSTR != 0:
                 ai = random.randint(1, 100)
                 if ai % 2 == 0:
-                    totaltimeSTR = (totaltimeSTR + random.randint(15, 25)
+                    totaltimeSTR = (totaltimeSTR + random.randint(15, 25))
                     botpitSTR = (botpitSTR - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while PERlapnumber != 10:
             PERlapnumber = (PERlapnumber + 1)
@@ -341,12 +318,9 @@ def dwnforce():
             if botpitPER != 0:
                 aj = random.randint(1, 100)
                 if aj % 2 == 0:
-                    totaltimePER = (totaltimeSTR + random.randint(15, 25)
+                    totaltimePER = (totaltimeSTR + random.randint(15, 25))
                     botpitPER = (botpitPER - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while GROlapnumber != 10:
             GROlapnumber = (GROlapnumber + 1)
@@ -356,12 +330,9 @@ def dwnforce():
             if botpitGRO != 0:
                 ak = random.randint(1, 100)
                 if ak % 2 == 0:
-                    totaltimeGRO = (totaltimeGOR + random.randint(15, 25)
+                    totaltimeGRO = (totaltimeGOR + random.randint(15, 25))
                     botpitGRO = (botpitGRO - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while MAGlapnumber != 10:
             MAGlapnumber = (MAGlapnumber + 1)
@@ -371,12 +342,9 @@ def dwnforce():
             if botpitMAG != 0:
                 al = random.randint(1, 100)
                 if al % 2 == 0:
-                    totaltimeMAG = (totaltimeMAG + random.randint(15, 25)
+                    totaltimeMAG = (totaltimeMAG + random.randint(15, 25))
                     botpitMAG = (botpitMAG - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while RUSlapnumber != 10:
             RUSlapnumber = (RUSlapnumber + 1)
@@ -386,12 +354,9 @@ def dwnforce():
             if botpitRUS != 0:
                 am = random.randint(1, 100)
                 if am % 2 == 0:
-                    totaltimeRUS = (totaltimeRUS + random.randint(15, 25)
+                    totaltimeRUS = (totaltimeRUS + random.randint(15, 25))
                     botpitRUS = (botpitRUS - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
 
         while KVYlapnumber != 10:
@@ -402,12 +367,9 @@ def dwnforce():
             if botpitKVY != 0:
                 an = random.randint(1, 100)
                 if an % 2 == 0:
-                    totaltimeKVY = (totaltimeKVY + random.randint(15, 25)
+                    totaltimeKVY = (totaltimeKVY + random.randint(15, 25))
                     botpitKVY = (botpitKVY - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while PIElapnumber != 10:
             PIElapnumber = (PIElapnumber + 1)
@@ -417,12 +379,9 @@ def dwnforce():
             if botpitPIE != 0:
                 ao = random.randint(1, 100)
                 if ao % 2 == 0:
-                    totaltimePIE = (totaltimePIE + random.randint(15, 25)
+                    totaltimePIE = (totaltimePIE + random.randint(15, 25))
                     botpitPIE = (botpitPIE - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while LEClapnumber != 10:
             LEClapnumber = (LEClapnumber + 1)
@@ -432,12 +391,9 @@ def dwnforce():
             if botpitLEC != 0:
                 ap = random.randint(1, 100)
                 if ap % 2 == 0:
-                    totaltimeLEC = (totaltimeLEC + random.randint(15, 25)
+                    totaltimeLEC = (totaltimeLEC + random.randint(15, 25))
                     botpitLEC = (botpitLEC - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while VETlapnumber != 10:
             VETlapnumber = (VETlapnumber + 1)
@@ -447,12 +403,9 @@ def dwnforce():
             if botpitVET != 0:
                 aq = random.randint(1, 100)
                 if aq % 2 == 0:
-                    totaltimeVET = (totaltimeVET + random.randint(15, 25)
+                    totaltimeVET = (totaltimeVET + random.randint(15, 25))
                     botpitVET = (botpitVET - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while RAIlapnumber != 10:
             RAIlapnumber = (RAIlapnumber + 1)
@@ -462,12 +415,9 @@ def dwnforce():
             if botpitRAI != 0:
                 ar = random.randint(1, 100)
                 if ar % 2 == 0:
-                    totaltimeRAI = (totaltimeRAI + random.randint(15, 25)
+                    totaltimeRAI = (totaltimeRAI + random.randint(15, 25))
                     botpitRAI = (botpitRAI - 1)
-                else:
-                    continue
-            else:
-                continue
+
 
         while GIOlapnumber != 10:
             GIOlapnumber = (GIOlapnumber + 1)
@@ -477,12 +427,10 @@ def dwnforce():
             if botpitGIO != 0:
                 at = random.randint(1, 100)
                 if at % 2 == 0:
-                    totaltimeGIO = (totaltimeGIO + random.randint(15, 25)
+                    totaltimeGIO = (totaltimeGIO + random.randint(15, 25))
                     botpitGIO = (botpitGIO - 1)
-                else:
-                    continue
-            else:
-                continue
+
+
         tyredegrading1 = (tyredegrading1 - 1)
         tyredegrading0 = (tyredegrading0 - 1)
         return render_template ('home.html', car0lapnumber=car0lapnumber, laptime1=laptime1, currenttyre0=currentyre0, tyreware0=tyreware0, laptime0=laptime0, currenttyre1=currentyre1, tyreware1=tyreware1, car1lapnumber=car1lapnumber)
