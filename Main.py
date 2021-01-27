@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import sys
 import random
 import time
 
@@ -12,55 +13,6 @@ def form():
 def dwnforce():
     DF0 = request.args.get('DF0', '') # Inporting the downforce choice from the forms
     DF1 = request.args.get('DF1', '')
-    return render_template('home.html')
-    def pit0(): # Pit function for car 0
-            tobtyre0 = request.args.get('Car0', '') # inporting the choice of tyre from home.html
-            if tobtyre0 == "Soft":
-                for x in range(sectorgaptime0):
-                    sectorgaptime0.append(sectorgaptime0[x] - 0.6) # decreasing time between sectors so car0 goes faster
-                tyredegrading0 = 2 # number of laps untill tyres ware out
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
-
-            elif tobtyre0 == "Medium":
-                tyredegrading0 = 3 # number of laps untill tyres ware out
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
-
-            elif tobtyre0 == "Hard":
-                for x in range(sectorgaptime0):
-                    sectorgaptime0.append(sectorgaptime0[x] + 0.7) # increasing time between sectors so car0 goes slower
-                tyredegrading0 = 4 # number of laps untill tyres ware out
-                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
-
-
-    def pit1(): # Pit function for car 1
-            tobtyre1 = request.args.get('Car1', '') # inporting the choice of tyre from home.html
-            if tobtyre1 == "Soft":
-                for x in range(sectorgaptime1):
-                    sectorgaptime1.append(sectorgaptime1[x] - 0.6) # decreasing time between sectors so car1 goes faster
-                tyredegrading1 = 2 # number of laps untill tyres ware out
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
-
-            elif tobtyre1 == "Medium":
-                tyredegrading1 = 3 # number of laps untill tyres ware out
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
-            elif tobtyre1 == "Hard":
-                for x in range(sectorgaptime1):
-                    sectorgaptime1.append(sectorgaptime1[x] + 0.7)# increasing time between sectors so car1 goes slower
-                tyredegrading1 = 4 # number of laps untill tyres ware out
-                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
-
-
-    def tyredegrading():
-        tyre0per = ((tyredegrading0/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 0
-        tyre1per = ((tyredegrading1/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 1
-        if tyre0per <= 0:
-            print("car0 out of race")
-            car0crash = 1
-        elif tyre1per <= 0:
-            print("car1 out of race")
-            car1crash = 1
-
-
     laplength = 6
     car02bpitted = 0
     car12bpitted = 0
@@ -117,7 +69,7 @@ def dwnforce():
 
 
     # Determining Car speeds in race
-    for x in range(len(OAPCircuit[x])):
+    for x in range(len(OAPCircuit)):
         Randspeed0 = int(random.randint(1, 100))
         Randposneg0 = int(random.randint(0, 100))
         if Randposneg0 % 2 == 0: # random speed variation
@@ -137,14 +89,14 @@ def dwnforce():
 
     botracers = [HAMlapspeed, BOTlapspeed, VERlapspeed, ALBlapspeed, NORlapspeed, RIClapspeed, OCOlapspeed, STRlapspeed, PERlapspeed, GROlapspeed, MAGlapspeed, RUSlapspeed, KVYlapspeed, PIElapspeed, LEClapspeed, VETlapspeed, RAIlapspeed, GIOlapspeed]
     botspeed = []
-    for x in range(len(OAPCircuit[x])): # random picking downforce levels for other racers
+    for x in range(len(OAPCircuit)): # random picking downforce levels for other racers
         u = random.randint(1,100)
         if u % 2 == 0:
             botspeed.append(-1)
         else:
             botspeed.append(1)
-        botracers[x].append(OAPCircuit[x] + (botspeed[x] * u))
-
+        print(len(botracers), file=sys.stderr)
+        botracers.insert(x, (OAPCircuit[x] + (botspeed[x] * u)))
 
     if DF0 == 1: # Applying differnces to speed depending on aro levels
         for x in range(19):
@@ -164,15 +116,15 @@ def dwnforce():
             car1lapspeed.append(car1lapspeed[x] + (plusminuslow[x] * random.randint(0, 5)))
 
     for x in range(len(car1lapspeed)): # giving variation to the speeds for the bots
-        botracers[x].append(botracers[x] + (u * random.randint(1, 5)))
+        botracers.insert(x, (botracers[x] + (u * random.randint(1, 5))))
 
 
     racersectortime = [sectorgaptime0, sectorgaptime1, sectorgaptimeHAM, sectorgaptimeBOT, sectorgaptimeVER, sectorgaptimeALB, sectorgaptimeNOR, sectorgaptimeRIC,  sectorgaptimeOCO, sectorgaptimeSTR, sectorgaptimePER, sectorgaptimeGRO, sectorgaptimeMAG, sectorgaptimeRUS, sectorgaptimeKVY, sectorgaptimePIE, sectorgaptimeLEC, sectorgaptimeVET, sectorgaptimeRAI, sectorgaptimeGIO]
     for x in range(20): # calculating time taken between sectors from speed and distance
         for i in range(len(car1lapspeed)):
-            racersectortime[x].append(0.2615 / (racersectortime[i]/3600))
+            racersectortime.insert(x, (0.2615 / (racersectortime[i]/3600)))
 
-    botpitH = 3
+    botpitHAM = 3
     botpitBOT = 3
     botpitVER = 3
     botpitALB = 3
@@ -209,8 +161,6 @@ def dwnforce():
                 tyredegrading()
             laptime0 = totaltime0
             pit0()
-
-        return render_template ('home.html', car0lapnumber=car0lapnumber, laptime1=laptime1, currenttyre0=currentyre0, tyreware0=tyreware0, laptime0=laptime0, currenttyre1=currentyre1, tyreware1=tyreware1, car1lapnumber=car1lapnumber)
 
             #enamy driver laps
 
@@ -433,8 +383,53 @@ def dwnforce():
 
         tyredegrading1 = (tyredegrading1 - 1)
         tyredegrading0 = (tyredegrading0 - 1)
+        print(totaltime1)
         return render_template ('home.html', car0lapnumber=car0lapnumber, laptime1=laptime1, currenttyre0=currentyre0, tyreware0=tyreware0, laptime0=laptime0, currenttyre1=currentyre1, tyreware1=tyreware1, car1lapnumber=car1lapnumber)
 
+def pit1(): # Pit function for car 1
+            tobtyre1 = request.args.get('Car1', '') # inporting the choice of tyre from home.html
+            if tobtyre1 == "Soft":
+                for x in range(sectorgaptime1):
+                    sectorgaptime1.append(sectorgaptime1[x] - 0.6) # decreasing time between sectors so car1 goes faster
+                tyredegrading1 = 2 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
 
+            elif tobtyre1 == "Medium":
+                tyredegrading1 = 3 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
+            elif tobtyre1 == "Hard":
+                for x in range(sectorgaptime1):
+                    sectorgaptime1.append(sectorgaptime1[x] + 0.7)# increasing time between sectors so car1 goes slower
+                tyredegrading1 = 4 # number of laps untill tyres ware out
+                sectorgaptime1.append(sectorgaptime1[x] + random.randint(15, 25)) # time taken from changing tyres
+
+
+def tyredegrading():
+        tyre0per = ((tyredegrading0/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 0
+        tyre1per = ((tyredegrading1/lapnumber) * 100) # making a percentage of tyre effectiveness / tyreware for car 1
+        if tyre0per <= 0:
+            print("car0 out of race")
+            car0crash = 1
+        elif tyre1per <= 0:
+            print("car1 out of race")
+            car1crash = 1
+
+def pit0(): # Pit function for car 0
+            tobtyre0 = request.args.get('Car0', '') # inporting the choice of tyre from home.html
+            if tobtyre0 == "Soft":
+                for x in range(sectorgaptime0):
+                    sectorgaptime0.append(sectorgaptime0[x] - 0.6) # decreasing time between sectors so car0 goes faster
+                tyredegrading0 = 2 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
+
+            elif tobtyre0 == "Medium":
+                tyredegrading0 = 3 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
+
+            elif tobtyre0 == "Hard":
+                for x in range(sectorgaptime0):
+                    sectorgaptime0.append(sectorgaptime0[x] + 0.7) # increasing time between sectors so car0 goes slower
+                tyredegrading0 = 4 # number of laps untill tyres ware out
+                sectorgaptime0.append(sectorgaptime0[x] + random.randint(15, 25)) # time taken from changing tyres
 
 
