@@ -47,12 +47,26 @@
 </style>
 </head>
 <body>
-
+<script>
+while ({{Finish}} =! 1) {
+getdata()
+}
+function getdata() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open('flask.py', {{car1lapnumber}}, {{tyre1per}}, {{laptime1}}, {{car0lapnumber}}, {{tyre0per}}, {{laptime0}}, {{Finish}}, true);
+  xhttp.send();
+}
+</script>
 <div class="grid-container">
   <div class="item1"><strong>Albert Park Circuit</strong> <br> Melbourne</div>
-  <div class="item2"><strong>Car0Data</strong> <br> Lap time: {{ totaltime0 }} <br> Current tyre: {{ currenttyre0 }} <br> Tyre Ware: {{ tyreware0 }}% </div>
+  <div class="item2"><strong>Car0Data</strong> <br> Total time: {{ totaltime0 }} <br> Tyre Ware: {{ tyre0per }} <br> Lap Number: {{ car0lapnumber }}</div>
   <div class="item3">LeaderBoard</div>
-  <div class="item4"><Strong>Car1Data</Strong> <br> Lap time: {{ totaltime1 }} <br> Current tyre: {{ currenttyre1 }} <br> Tyre Ware: {{ tyreware1 }}%</div>
+  <div class="item4"><Strong>Car1Data</Strong> <br> Total time: {{ totaltime1 }} <br> Tyre Ware: {{ tyre1per }} <br> Lap Number: {{ car1lapnumber }}</div>
   <div class="item5"><strong>Car0PitOptions:</strong>
   <form action="/home">
   <input type="radio" id="Car0" name="Car0" value="Soft">
