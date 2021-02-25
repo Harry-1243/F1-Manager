@@ -16,11 +16,13 @@ car12bpitted = 0
 currenttyre1 = "Medium"
 currenttyre0 = "Medium"
 tobtyre1 = ""
+global  Finish
+Finish = 0
 tobtyre0 = ""
 car0crash = 0
 car1crash = 0
-tyredegrading0 = 6
-tyredegrading1 = 6
+global tyredegrading0
+global tyredegrading1
 car0crash = 1
 tyredegrading1 = 6
 tyredegrading0 = 6
@@ -173,25 +175,25 @@ def dwnforce():
             botspeed.append(1)
 
     for x in range(len(OAPCircuit)): # calculating sector speed
-        botracers.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        HAMlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        BOTlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        VERlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        ALBlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        NORlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        RIClapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        OCOlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        STRlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        PERlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        GROlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        MAGlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        RUSlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        KVYlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        PIElapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        LEClapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        VETlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        RAIlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
-        GIOlapspeed.insert(x, (OAPCircuit[x] + (botspeed[x] * u) + random.randint(1, 5)))
+        botracers.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        HAMlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        BOTlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        VERlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        ALBlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        NORlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        RIClapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        OCOlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        STRlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        PERlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        GROlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        MAGlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        RUSlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        KVYlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        PIElapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        LEClapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        VETlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        RAIlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
+        GIOlapspeed.insert(x, (OAPCircuit[x] + random.randint(1, 5)))
 
     if DF0 == 1: # Applying differnces to speed depending on aro levels
         for x in range(19):
@@ -212,7 +214,6 @@ def dwnforce():
 
     for x in range(len(car1lapspeed)): # giving variation to the speeds for the bots
             botracers.insert(x, (botracers[x] + (u * random.randint(1, 5))))
-
 
     for x in range(20): # calculating time taken between sectors from speed and distance
         sectorgaptime0.insert(x, float(0.2615 / (car1lapspeed[x]/3600.0)))
@@ -237,7 +238,7 @@ def dwnforce():
         sectorgaptimeGIO.insert(x, float(0.2615 / (GIOlapspeed[x]/3600.0)))
 
     race()
-    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, laptime1=laptime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, laptime0=laptime0)
+    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, totaltime1=totaltime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, totaltime0=totaltime0)
 
 def tyredegrading():
     global tyredegrading1
@@ -312,16 +313,15 @@ def car0R():
     global car0lapnumber
     global tyredegrading0
     while car0lapnumber != 10:
-        car0lapnumber = (car0lapnumber + 1)
-        tyredegrading0 = tyredegrading0 - 1
-        for y in range(len(car0lapspeed)):
-            totaltime0 = (totaltime0 + sectorgaptime0[y])
+        car0lapnumber = (car0lapnumber + 1)  # car's lap number
+        for y in range(len(sectorgaptime0)):
+            totaltime0 = (totaltime0 + sectorgaptime0[y])  # calculating time taken for entire race
             tyredegrading()
-            time.sleep(sectorgaptime0[y])
-        pit0()
+            time.sleep(sectorgaptime1[y])
+        laptime0 = totaltime0  # lap time
         tyredegrading0 = (tyredegrading0 - 1)
         if car0crash == 1:
-            car0lapnumber = (10)
+            car1lapnumber = (10)
 #enamy driver laps
 
 def HAMR():
@@ -477,7 +477,7 @@ def GROR():
 def MAGR():
     global totaltimeMAG
     global MAGlapnumber
-    botpitHMAG = 3
+    botpitMAG = 3
     while MAGlapnumber != 10:
         MAGlapnumber = (MAGlapnumber + 1)
         for y in range(len(car0lapspeed)):
@@ -582,7 +582,7 @@ def RAIR():
 def GIOR():
     global totaltimeGIO
     global GIOlapnumber
-    botpitHGIO = 3
+    botpitGIO = 3
     while GIOlapnumber != 10:
         GIOlapnumber = (GIOlapnumber + 1)
         for y in range(len(car0lapspeed)):
@@ -638,7 +638,8 @@ def race():
     t18.start()
     t19.start()
     t20.start()
-    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, laptime1=laptime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, laptime0=laptime0)
+    Finish = 1
+    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, laptime1=laptime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, laptime0=laptime0, Finish=Finish)
 
 @app.route('/podium')
 def podium():
@@ -653,7 +654,3 @@ def podium():
 
 
     return render_template('podium.html')  # Linking flask_app.py to podium.html
-
-
-
-
