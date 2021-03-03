@@ -236,9 +236,10 @@ def dwnforce():
         sectorgaptimeVET.insert(x, float(0.2615 / (VETlapspeed[x]/3600.0)))
         sectorgaptimeRAI.insert(x, float(0.2615 / (RAIlapspeed[x]/3600.0)))
         sectorgaptimeGIO.insert(x, float(0.2615 / (GIOlapspeed[x]/3600.0)))
-
-    race()
     return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, totaltime1=totaltime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, totaltime0=totaltime0)
+    race()
+
+
 
 def tyredegrading():
     global tyredegrading1
