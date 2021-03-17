@@ -131,6 +131,8 @@ laptime1 = 0
 laptime0 = 0
 totaltime1 = 0
 car1lapnumber = 0
+DF0 = 0
+DF1 = 0
 
 app = Flask(__name__)
 @app.route('/')
@@ -138,9 +140,15 @@ def form():
         return render_template('forms.html')  # Linking flask_app.py to forms.html
 
 @app.route('/home')
-def dwnforce():
+def retrive():
     DF0 = request.args.get('DF0', '')
     DF1 = request.args.get('DF1', '')
+    return render_template('home.html')
+
+
+@app.route('/racedata')
+def dwnforce():
+
     DF0 = 0
     DF1 = 1
     # Lap Speeds
@@ -236,10 +244,15 @@ def dwnforce():
         sectorgaptimeVET.insert(x, float(0.2615 / (VETlapspeed[x]/3600.0)))
         sectorgaptimeRAI.insert(x, float(0.2615 / (RAIlapspeed[x]/3600.0)))
         sectorgaptimeGIO.insert(x, float(0.2615 / (GIOlapspeed[x]/3600.0)))
-    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, totaltime1=totaltime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, totaltime0=totaltime0)
+    data = []
+    data.append(car1lapnumber)
+    data.append(tyre1per)
+    data.append(totaltime1)
+    data.append(car0lapnumber)
+    data.append(totaltime0)
+    data.append(tyre0per)
+    return str(data)
     race()
-
-
 
 def tyredegrading():
     global tyredegrading1
@@ -617,30 +630,78 @@ t18 = threading.Thread(target=VETR)
 t19 = threading.Thread(target=RAIR)
 t20 = threading.Thread(target=GIOR)
 
+@app.route('/race')
 def race():
     print(laplength)
-    t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-    t5.start()
-    t6.start()
-    t7.start()
-    t8.start()
-    t9.start()
-    t10.start()
-    t11.start()
-    t12.start()
-    t13.start()
-    t14.start()
-    t15.start()
-    t16.start()
-    t17.start()
-    t18.start()
-    t19.start()
-    t20.start()
+    if not t1.is_alive():
+        t1.start()
+
+    if not t2.is_alive():
+        t2.start()
+
+    if not t3.is_alive():
+        t3.start()
+
+    if not t4.is_alive():
+        t4.start()
+
+    if not t5.is_alive():
+        t5.start()
+
+    if not t6.is_alive():
+        t6.start()
+
+    if not t7.is_alive():
+        t7.start()
+
+    if not t8.is_alive():
+        t8.start()
+
+    if not t9.is_alive():
+        t9.start()
+
+    if not t10.is_alive():
+        t10.start()
+
+    if not t11.is_alive():
+        t11.start()
+
+    if not t12.is_alive():
+        t12.start()
+
+    if not t13.is_alive():
+        t13.start()
+
+    if not t14.is_alive():
+        t14.start()
+
+    if not t15.is_alive():
+        t15.start()
+
+    if not t16.is_alive():
+        t16.start()
+
+    if not t17.is_alive():
+        t17.start()
+
+    if not t18.is_alive():
+        t18.start()
+
+    if not t19.is_alive():
+        t19.start()
+
+    if not t20.is_alive():
+        t20.start()
+
     Finish = 1
-    return render_template('home.html', car1lapnumber=car1lapnumber, tyre1per=tyre1per, laptime1=laptime1, car0lapnumber=car0lapnumber, tyre0per=tyre0per, laptime0=laptime0, Finish=Finish)
+    data = []
+    data.append(car1lapnumber)
+    data.append(tyre1per)
+    data.append(totaltime1)
+    data.append(car0lapnumber)
+    data.append(totaltime0)
+    data.append(tyre0per)
+    return str(data)
 
 @app.route('/podium')
 def podium():
